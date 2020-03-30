@@ -1,2 +1,2 @@
 # lwarode.github.io
-Personal website
+Personal website from Lukas Warode
