@@ -1,0 +1,210 @@
+---
+title: "ParlGov Visualizations -- Parties"
+output:
+  html_document:
+    code_folding: hide
+    fig_width: 8 
+    fig_height: 5 
+    theme: cosmo
+---
+
+```{r package, include = FALSE}
+library(tidyverse)
+library(countrycode)
+library(grid)
+library(ggrepel)
+```
+
+```{r dataset, include = FALSE}
+party_url <- "http://www.parlgov.org/static/data/experimental-cp1252/view_party.csv"
+party_raw <- read_csv(party_url, locale = readr::locale(encoding = "latin1"))
+```
+
+```{r data wrangling and precaution, include = FALSE}
+## Party ----
+fam_level <- c("com", "eco", "soc", "agr", "lib", "chr", "con", "right")
+
+# countrycode informations
+party <- party_raw %>% 
+  mutate(region = as.factor(countrycode(country_name, "country.name", "region")),
+         family = factor(family_name_short, fam_level),
+         fam_color = case_when(
+           family == "com" ~ "#FB9A99",
+           family == "eco" ~ "#33A02C",
+           family == "soc" ~ "#E31A1C",
+           family == "agr" ~ "#B2DF8A",
+           family == "lib" ~ "#FDBF6F",
+           family == "chr" ~ "#FF7F00",
+           family == "con" ~ "#1F78B4",
+           family == "right" ~ "#A6CEE3"
+         ),
+         region_ = (sub(" ", "_", region))) %>% 
+  filter(!is.na(family))
+
+# party color
+pfcols <- as.character(unique(party$fam_color))
+names(pfcols) <- as.character(unique(party$family))
+
+# custom annotations for axis labeling
+lr_0 <- textGrob("Extreme left", gp = gpar(fontsize = 9, fontfamily = "Formata"))
+lr_10 <- textGrob("Extreme right", gp = gpar(fontsize = 9, fontfamily = "Formata"))
+```
+
+```{r region subset, include = FALSE}
+# add subsets of region to environment (for parties)
+r_list <- setNames(split(party, party$region), sort(unique(party$region)))
+list2env(r_list, globalenv())
+```
+___
+
+## Party Families {.tabset .tabset-fade}
+
+___
+
+The Party Families are grouped by region and each country is plotted severally. The graphs are visualizing the ideological span length of the parties and its families.
+
+___
+
+Each Party Family has a certain abbreviation:
+
+* com -- Communist/Socialist
+* eco -- Green/Ecologist
+* soc -- Social demoncracy
+* agr -- Agrarian
+* lib -- Liberal
+* chr -- Christian democracy
+* con -- Conservative
+* right -- Right-wing
+
+___
+
+```{r party plot function, message = FALSE, warning = FALSE}
+plot_party_families_lr <- function(x) {
+  
+  subset_p <- party %>% # subset for looping
+    filter(country_name == x)
+
+  ggplot(data = subset_p, 
+         aes(x = family, y = left_right, color = family)) + 
+    geom_point() +
+    geom_line() + 
+    coord_flip(clip = "off") +
+    scale_color_manual(values = pfcols) +
+    scale_y_continuous(breaks = seq(0, 10, by = 1),
+                       limits = c(0, 10)) + 
+    annotation_custom(lr_0, xmin = -0.25, xmax = -0.25, ymin = 0, ymax = 0) +
+    annotation_custom(lr_10, xmin = -0.25, xmax = -0.25, ymin = 10, ymax = 10) + 
+    theme_light() + 
+    ggtitle(paste0("\n", subset_p$country_name)) +
+    labs(
+      x = "",
+      y = "",
+      subtitle = "0 = (Extreme) Left | 10 = (Extreme) Right",
+      color = "Party Family"
+    )  +
+    theme(text = element_text(family = "Formata-CondensedLight", size = 10),
+          legend.text = element_text(size = 12),
+          plot.title = element_text(hjust = 0.5, size = 14),
+          plot.subtitle = element_text(hjust = 0.5, size = 12),
+          axis.ticks.y = element_blank(),
+          axis.text.y = element_blank(),
+          axis.text.x = element_text(size = 12),
+          plot.margin = unit(c(0, 0, 1, 0.5), "cm"))
+}
+```
+
+### All
+
+```{r message = FALSE, warning = FALSE, fig.height = 16, fig.width = 12}
+ggplot(data = subset(party, !is.na(party$family)), 
+       aes(x = family, y = left_right, color = family)) + 
+    geom_line() + 
+    geom_point() +
+    facet_wrap(~ country_name, ncol = 4, scales = "free") +
+    coord_flip(clip = "off") +
+    scale_color_manual(values = pfcols) +
+    scale_y_continuous(breaks = seq(0, 10, by = 1),
+                       limits = c(0, 10),
+                       name = "Left-Right scale") + 
+    theme_light() + 
+    ggtitle(paste0("\n", "Party Families")) +
+    labs(
+      x = "",
+      y = "",
+      color = "Party Family"
+    )  +
+    theme(text = element_text(family = "Formata-CondensedLight", size = 15),
+          legend.title = element_text(size = 20),
+          legend.text = element_text(size = 17.5),
+          plot.title = element_text(hjust = 0.5, size = 25),
+          axis.ticks.y = element_blank(),
+          axis.text.y = element_blank(),
+          axis.text.x = element_text(size = 12.5),
+          plot.margin = unit(c(0, 0, 1, 0.5), "cm"),
+          panel.spacing = unit(1, "lines")
+          )
+```
+
+### Australia and New Zealand
+
+```{r message = FALSE, warning = FALSE}
+for(country_name in unique(`Australia and New Zealand`$country_name)) {
+  print(plot_party_families_lr(x = country_name))
+}
+```
+
+### Eastern Asia
+
+```{r message = FALSE, warning = FALSE}
+for(country_name in unique(`Eastern Asia`$country_name)) {
+  print(plot_party_families_lr(x = country_name))
+}
+```
+
+### Eastern Europe
+
+```{r message = FALSE, warning = FALSE}
+for(country_name in unique(`Eastern Europe`$country_name)) {
+  print(plot_party_families_lr(x = country_name))
+}
+```
+
+### Northern America
+
+```{r message = FALSE, warning = FALSE}
+for(country_name in unique(`Northern America`$country_name)) {
+  print(plot_party_families_lr(x = country_name))
+}
+```
+
+### Northern Europe
+
+```{r message = FALSE, warning = FALSE}
+for(country_name in unique(`Northern Europe`$country_name)) {
+  print(plot_party_families_lr(x = country_name))
+}
+```
+
+### Southern Europe
+
+```{r message = FALSE, warning = FALSE}
+for(country_name in unique(`Southern Europe`$country_name)) {
+  print(plot_party_families_lr(x = country_name))
+}
+```
+
+### Western Asia
+
+```{r message = FALSE, warning = FALSE}
+for(country_name in unique(`Western Asia`$country_name)) {
+  print(plot_party_families_lr(x = country_name))
+}
+```
+
+### Western Europe
+
+```{r message = FALSE, warning = FALSE}
+for(country_name in unique(`Western Europe`$country_name)) {
+  print(plot_party_families_lr(x = country_name))
+}
+```

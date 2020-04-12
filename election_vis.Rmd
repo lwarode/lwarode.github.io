@@ -1,0 +1,184 @@
+---
+title: "ParlGov Visualizations -- Elections"
+output:
+  html_document:
+    code_folding: hide
+    fig_width: 8 
+    fig_height: 5 
+    theme: cosmo 
+---
+
+```{r package, include = FALSE}
+library(tidyverse)
+library(countrycode)
+library(grid)
+library(ggrepel)
+library(lubridate)
+```
+
+```{r datasets, include = FALSE}
+election_url <- "http://www.parlgov.org/static/data/experimental-cp1252/view_election.csv"
+election_raw <- read_csv(election_url, locale = readr::locale(encoding = "latin1"))
+lces <- read_csv("data/vdem_lces_new.csv") # for further differentiation among electoral systems
+```
+
+```{r data wrangling and precaution, include = FALSE}
+## Election ----
+election <- election_raw %>% 
+  mutate(vote_share_0 = vote_share / 100,
+                year = as.numeric(substr(election_date, 1, 4))) %>% 
+  group_by(election_id, year) %>% 
+  filter(!is.na(vote_share_0)) %>% 
+  mutate(enep = 1 / sum(vote_share_0^2), # ENEP
+         enpp = 1 / sum((seats/seats_total)^2), # ENPP
+         region = as.factor(countrycode(country_name, "country.name", "region")) # region
+         ) 
+
+election_enp <- election %>% 
+  select(country_name, country_name_short, region, election_type, year, election_id, election_date, enep, enpp) %>% 
+  gather(enp_type, enp_number, enep:enpp) %>% 
+  left_join(lces) %>% 
+  distinct() %>% 
+  mutate(enp_round = as.numeric(round(enp_number, 1)),
+         decade_sd = floor_date(election_date, years(10)))
+```
+
+```{r election system elec subset, include = FALSE}
+# add subsets of electoral systems to environment (for elections)
+e_list <- setNames(split(election_enp, election_enp$v2elloelsy_l), sort(unique(election_enp$v2elloelsy_l)))
+list2env(e_list, globalenv())
+```
+
+___
+
+## Elections: Effective Number of Parties {.tabset .tabset-fade}
+
+___
+
+The *Effective Number of Parties* (Laakso/Taagepera 1979) is a measurement concept which indicates an adjusted value for a country's party system. 
+
+The value itself can be divided into two measures:
+
+1. ENEP: Effective Number of ***Electoral*** Parties
+2. ENPP: Effective Number of ***Parliamentary*** Parties
+
+The *Effective Number of Parties* is calculated as follows: $$ENP = {\frac{1}{\sum_{i = 1}^n p_i^2}}$$
+
+The formula divides 1 by the sum  of each party's relative share $p^2$. The proportion *p* indicates either each party's vote (***ENEP***) or seat (***ENPP***) share.
+
+The values are displayed for each country grouped by region.
+
+___
+
+```{r election plot function, message = FALSE, warning = FALSE}
+plot_enp <- function(x) {
+  
+  subset_e <- election_enp %>% # subset for looping
+    filter(country_name == x, 
+           election_type == "parliament")
+  
+  ggplot(subset_e, aes(x = election_date, y = enp_number, group = enp_type, color = enp_type)) +
+    geom_line() +
+    geom_point() + 
+    scale_x_date(breaks = seq(min(subset_e$decade_sd), Sys.Date(), by = "5 years"), 
+               date_label = "%Y") +
+    scale_y_continuous(limits = c(0, max(subset_e$enp_round)),
+                       breaks = seq(0, 15, 1)) +
+    scale_color_discrete(labels = c("ENEP", "ENPP")) +
+    theme_light() + 
+    theme(
+      legend.title = element_blank(),
+      axis.text.x = element_text(angle = 45, vjust = 0.5, size = 10),
+      text = element_text(family = "Formata-CondensedLight", size = 10),
+      plot.title = element_text(hjust = 0.5, size = 14),
+      axis.text.y = element_text(size = 10)
+    ) +
+    ggtitle(paste0("\n", subset_e$country_name)) +
+    labs(
+      x = "Year",
+      y = "ENP"
+    )
+}
+```
+
+### All
+
+```{r message = FALSE, warning = FALSE, fig.height = 16, fig.width = 12}
+    ggplot(election_enp, aes(x = year, y = enp_number, group = enp_type, color = enp_type)) +
+    geom_line() +
+    facet_wrap(~ country_name, ncol = 4) +
+    scale_x_continuous(breaks = seq(min(election_enp$year), max(election_enp$year) + 5, by = 10)) +
+    scale_y_continuous(limits = c(0, max(election_enp$enp_round)),
+                       breaks = seq(0, 15, 2)) +
+    scale_color_discrete(labels = c("ENEP", "ENPP")) +
+    theme_light() + 
+    theme(text = element_text(family = "Formata-CondensedLight", size = 12),
+      legend.title = element_blank(),
+      legend.text = element_text(size = 30),
+      axis.text.x = element_text(angle = 45, vjust = 0.5, size = 10),
+      plot.title = element_text(hjust = 0.5, size = 20),
+      axis.text.y = element_text(size = 12, face = "bold"),
+      panel.spacing = unit(1, "lines")
+    ) +
+    ggtitle(paste0("\n", "Effective Number of Parties")) +
+    labs(
+      x = "Year",
+      y = "ENP"
+    )
+```
+
+### First-past-the-post
+
+```{r message = FALSE, warning = FALSE}
+for(country_name in unique(`First-past-the-post`$country_name)) {
+  print(plot_enp(x = country_name))
+}
+```
+
+### Alternative vote (SMD)
+
+```{r message = FALSE, warning = FALSE}
+for(country_name in unique(`Alternative vote (SMD)`$country_name)) {
+  print(plot_enp(x = country_name))
+}
+```
+
+### Parallel (SMD/PR)
+
+```{r message = FALSE, warning = FALSE}
+for(country_name in unique(`Parallel (SMD/PR)`$country_name)) {
+  print(plot_enp(x = country_name))
+}
+```
+
+### Mixed-member PR
+
+```{r message = FALSE, warning = FALSE}
+for(country_name in unique(`Mixed-member PR`$country_name)) {
+  print(plot_enp(x = country_name))
+}
+```
+
+### List PR with small MMDs
+
+```{r message = FALSE, warning = FALSE}
+for(country_name in unique(`List PR with small MMDs`$country_name)) {
+  print(plot_enp(x = country_name))
+}
+```
+
+### List PR with large MMDs
+
+```{r message = FALSE, warning = FALSE}
+for(country_name in unique(`List PR with large MMDs`$country_name)) {
+  print(plot_enp(x = country_name))
+}
+```
+
+### STV
+
+```{r message = FALSE, warning = FALSE}
+for(country_name in unique(`STV`$country_name)) {
+  print(plot_enp(x = country_name))
+}
+```

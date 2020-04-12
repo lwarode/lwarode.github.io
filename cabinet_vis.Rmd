@@ -1,0 +1,230 @@
+---
+title: "ParlGov Visualizations -- Cabinets"
+output:
+  html_document:
+    code_folding: hide
+    theme: cosmo
+---
+
+```{r package, include = FALSE}
+library(tidyverse)
+library(countrycode)
+library(grid)
+library(ggrepel)
+library(lubridate)
+```
+
+```{r datasets, include = FALSE}
+cabinet_url <- "http://www.parlgov.org/static/data/experimental-cp1252/view_cabinet.csv"
+cabinet_raw <- read_csv(cabinet_url, locale = readr::locale(encoding = "latin1"))
+election_url <- "http://www.parlgov.org/static/data/experimental-cp1252/view_election.csv"
+election_raw <- read_csv(election_url, locale = readr::locale(encoding = "latin1"))
+lces <- read_csv("data/vdem_lces_new.csv") # for further differentiation among electoral systems
+```
+
+```{r data wrangling and precaution, include = FALSE}
+## Cabinet ----
+cabinet <- cabinet_raw %>% 
+  left_join(election_raw) %>% 
+  filter(cabinet_party == 1) %>% 
+  mutate(vote_share_0 = vote_share / 100,
+         year_e = as.numeric(substr(election_date, 1, 4)),
+         year_c = as.numeric(substr(start_date, 1, 4))
+         ) %>% 
+  group_by(cabinet_name) %>% 
+  mutate(seat_share_cab = seats / sum(seats), # seat share of cabinet party -- related to the maximum of cabinet seats (one party government ~ 100%)
+         check_lr = if_else(!is.na(left_right),
+                            1,
+                            0),
+         check_s = if_else(seats == 0,
+                            0,
+                            1),
+         nr_cab_parties = sum(n()), # number of parties of the cabinet
+         cab_min_lr = min(left_right, na.rm = TRUE), # lowest lr value of cabinet party
+         cab_max_lr = max(left_right, na.rm = TRUE)) %>%  # highest lr value of cabinet party
+  filter(check_lr == 1,
+         check_s == 1) %>% 
+  group_by(cabinet_name) %>% 
+  mutate(cab_mean_lr = sum(seats / sum(seats) * left_right))
+  
+# Just keep one observation per cabinet
+cabinet_single <- cabinet %>% 
+  distinct(cabinet_name, .keep_all = TRUE) %>% 
+  group_by(cabinet_name) %>% 
+  distinct(cab_mean_lr, .keep_all = TRUE) %>% 
+  ungroup() %>% 
+  mutate(end_date = if_else(country_name == lead(country_name), # end date of cabinet
+                           lead(start_date), 
+                           Sys.Date()),
+         duration = end_date - start_date,
+         duration = as.numeric(duration), # duration of cabinet
+         decade_sd = floor_date(start_date, years(10))
+  ) %>% 
+  filter(caretaker != 1, # remove caretaker cabinets
+         duration >= 90 # remove cabinets with a duration less then 90 days
+  ) %>% 
+  group_by(country_name, decade_sd) %>% 
+  mutate(nr_decade_cabs = sum(n())) %>% 
+  left_join(lces)
+
+# mean(cabinet_single$duration, na.rm = TRUE)
+# median(cabinet_single$duration, na.rm = TRUE)
+# sd(cabinet_single$duration, na.rm = TRUE)
+# ggplot(cabinet_single, aes(duration)) + geom_histogram()
+```
+
+```{r election system cab subset, include = FALSE}
+# add subsets of electoral systems to environment (for cabinets)
+c_list <- setNames(split(cabinet_single, cabinet_single$v2elloelsy_l), sort(unique(cabinet_single$v2elloelsy_l)))
+list2env(c_list, globalenv())
+```
+
+___
+
+## Ideological Postion of Cabinets {.tabset .tabset-fade}
+
+___
+
+The Left-Right scale is an established measure to indicate the ideological orientation of parties and thus of cabinets. In the following all cabinets of the ParlGov database are visually represented. The ideological mean position is calculated on the basis of the relative seat share of the cabinet parties and is illustrated by a single graphical point. If more than one party (or rather parliamentary group) is part of a cabinet, the ideological range of the included cabinet parties is shown by a range line.
+
+This means that cabinets are graphically seperated as follows: 
+
+* **One-party governments** are characterized by a single point
+* **Coalitions** are identified with an additional ideological range line, next to the single point of the ideological cabinet mean
+
+For reasons of clarity, all caretaker cabinets and cabinets with a duration less than 3 months are excluded in the following visualizations. Some cabinets are also completely excluded from the labelling if a label would cause graphical uncertainties.
+
+___
+
+```{r cabinet plot function, message = FALSE, warning = FALSE}
+plot_cab <- function(x) {
+  
+  subset_c <- cabinet_single %>% # subset for looping
+    filter(country_name == x) 
+  
+  ggplot(subset_c) + 
+  scale_x_continuous(breaks = seq(0, 10, by = 1),
+                     limits = c(0, 10)) + 
+  scale_y_date(breaks = seq(min(subset_c$decade_sd), max(subset_c$end_date), by = "10 years"), 
+               date_label = "%Y") + 
+  geom_vline(xintercept = 5, size = 0.5, alpha = 0.25) +
+  geom_errorbarh(aes(xmin = cab_min_lr, xmax = cab_max_lr, y = start_date), 
+                 alpha = 0.75, height = 5, lwd = 0.5) +
+  geom_point(aes(x = cab_mean_lr, y = start_date), size = 2.5, alpha = 1) + 
+  geom_label_repel(aes(x = cab_mean_lr, y = start_date,
+                       label = if_else(nr_decade_cabs < 10, 
+                                       subset_c$cabinet_name,
+                                       ""),
+                       family = "Formata",
+                       point.padding = NA),
+                   arrow = arrow(length = unit(0.01, "npc"), type = "closed", ends = "last"),
+                   size = 3,
+                   segment.alpha = 0.25,
+                   segment.size = 1,
+                   nudge_x = ifelse(subset_c$cab_mean_lr < mean(subset_c$cab_mean_lr, na.rm = TRUE),
+                                    min(subset_c$cab_min_lr, na.rm = TRUE) - 1 - subset_c$cab_mean_lr,
+                                    max(subset_c$cab_max_lr, na.rm = TRUE) + 1 - subset_c$cab_mean_lr)) +
+  theme_light() + 
+  theme(text = element_text(family = "Formata-CondensedLight", size = 12),
+        plot.title = element_text(hjust = 0.5, size = 20, face = "bold"),
+        plot.subtitle = element_text(hjust = 0.5, size = 16),
+        #plot.title = element_text(hjust = 0.5, size = 14),
+        #plot.subtitle = element_text(hjust = 0.5, size = 12),
+        #axis.ticks.y = element_blank(),
+        axis.text.y = element_text(size = 14),
+        axis.text.x = element_text(size = 14, face = "bold"),
+        plot.margin = unit(c(0, 0.5, 1, 1), "cm")) + 
+  ggtitle(paste0("\n", subset_c$country_name)) +
+  labs(
+    x = "Left-Right scale",
+    y = "Start Date of Cabinet",
+    subtitle = "0 = (Extreme) Left | 10 = (Extreme) Right") +
+  coord_cartesian(clip = "off")
+}
+```
+
+### All
+
+```{r message = FALSE, warning = FALSE, fig.height = 36, fig.width = 12}
+ggplot(cabinet_single) + 
+  scale_x_continuous(breaks = seq(0, 10, by = 1),
+                     limits = c(0, 10)) +
+  scale_y_date(breaks = seq(min(cabinet_single$decade_sd), 
+                            max(cabinet_single$end_date), 
+                            by = "10 years"),
+               date_label = "%Y") + 
+  facet_wrap(~country_name, ncol = 4, scales = "free_x") +
+  geom_vline(xintercept = 5, size = 0.5, alpha = 0.25) +
+  geom_errorbarh(aes(xmin = cab_min_lr, xmax = cab_max_lr, y = start_date), alpha = 0.5) +
+  geom_point(aes(x = cab_mean_lr, y = start_date), alpha = 0.5) + 
+  theme_light() + 
+  theme(text = element_text(family = "Formata-CondensedLight", size = 15),
+        plot.title = element_text(hjust = 0.5, size = 20),
+        axis.text.y = element_text(size = 14),
+        axis.text.x = element_text(size = 14),
+        panel.spacing = unit(1, "lines")
+        ) + 
+  ggtitle(paste0("\n", "Ideological Position and Range of Cabinets")) +
+  labs(
+    x = "Left-Right scale",
+    y = "Year") +
+  coord_cartesian(clip = "off")
+```
+
+
+### First-past-the-post
+
+```{r message = FALSE, warning = FALSE, fig.height = 12, fig.width = 12}
+for(country_name in unique(`First-past-the-post`$country_name)) {
+  print(plot_cab(x = country_name))
+}
+```
+
+### Alternative vote (SMD)
+
+```{r message = FALSE, warning = FALSE, fig.height = 12, fig.width = 12}
+for(country_name in unique(`Alternative vote (SMD)`$country_name)) {
+  print(plot_cab(x = country_name))
+}
+```
+
+### Parallel (SMD/PR)
+
+```{r message = FALSE, warning = FALSE, fig.height = 12, fig.width = 12}
+for(country_name in unique(`Parallel (SMD/PR)`$country_name)) {
+  print(plot_cab(x = country_name))
+}
+```
+
+### Mixed-member PR
+
+```{r message = FALSE, warning = FALSE, fig.height = 12, fig.width = 12}
+for(country_name in unique(`Mixed-member PR`$country_name)) {
+  print(plot_cab(x = country_name))
+}
+```
+
+### List PR with small MMDs
+
+```{r message = FALSE, warning = FALSE, fig.height = 12, fig.width = 12}
+for(country_name in unique(`List PR with small MMDs`$country_name)) {
+  print(plot_cab(x = country_name))
+}
+```
+
+### List PR with large MMDs
+
+```{r message = FALSE, warning = FALSE, fig.height = 12, fig.width = 12}
+for(country_name in unique(`List PR with large MMDs`$country_name)) {
+  print(plot_cab(x = country_name))
+}
+```
+
+### STV
+
+```{r message = FALSE, warning = FALSE, fig.height = 12, fig.width = 12}
+for(country_name in unique(`STV`$country_name)) {
+  print(plot_cab(x = country_name))
+}
+```
+

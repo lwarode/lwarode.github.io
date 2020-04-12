@@ -1,0 +1,169 @@
+country_name,country_name_short,v2elloelsy,year_start,year_end,v2elloelsy_l
+Afghanistan,AFG,10,2005,2020,SNTV
+Angola,AGO,8,1992,2020,List PR with large MMDs
+Albania,ALB,8,2009,2020,List PR with large MMDs
+United Arab Emirates,ARE,10,2006,2020,SNTV
+Argentina,ARG,7,1965,2020,List PR with small MMDs
+Armenia,ARM,8,2017,2020,List PR with large MMDs
+Australia,AUS,2,1922,2020,Alternative vote (SMD)
+Austria,AUT,7,1994,2020,List PR with small MMDs
+Azerbaijan,AZE,5,1995,2020,Parallel (SMD/PR)
+Burundi,BDI,7,1993,2020,List PR with small MMDs
+Belgium,BEL,8,1946,2020,List PR with large MMDs
+Benin,BEN,7,1995,2020,List PR with small MMDs
+Bangladesh,BGD,0,1973,2020,First-past-the-post
+Bulgaria,BGR,5,1990,2020,Parallel (SMD/PR)
+Bahrain,BHR,1,2002,2020,Two-round system
+Bosnia and Herzegovina,BIH,8,2006,2020,List PR with large MMDs
+Belarus,BLR,0,2016,2020,First-past-the-post
+Bolivia,BOL,6,1997,2020,Mixed-member PR
+Brazil,BRA,5,1947,2020,Parallel (SMD/PR)
+Barbados,BRB,0,1951,2020,First-past-the-post
+Bhutan,BTN,0,2008,2020,First-past-the-post
+Botswana,BWA,0,1965,2020,First-past-the-post
+Central African Republic,CAF,1,1993,2020,Two-round system
+Canada,CAN,0,1841,2020,First-past-the-post
+Switzerland,CHE,8,1919,2020,List PR with large MMDs
+Chile,CHL,7,1925,2020,List PR with small MMDs
+Ivory Coast,CIV,0,1980,2020,First-past-the-post
+Cameroon,CMR,5,1992,2020,Parallel (SMD/PR)
+Democratic Republic of Congo,COD,5,2006,2020,Parallel (SMD/PR)
+Republic of the Congo,COG,1,1992,2020,Two-round system
+Colombia,COL,8,1962,2020,List PR with large MMDs
+Comoros,COM,1,1992,2020,Two-round system
+Cape Verde,CPV,7,1991,2020,List PR with small MMDs
+Costa Rica,CRI,8,1962,2020,List PR with large MMDs
+Cuba,CUB,1,1993,2020,Two-round system
+Cyprus,CYP,8,1981,2020,List PR with large MMDs
+Czech Republic,CZE,8,1920,2020,List PR with large MMDs
+Germany,DEU,6,1949,2020,Mixed-member PR
+Djibouti,DJI,6,2013,2020,Mixed-member PR
+Denmark,DNK,8,1971,2020,List PR with large MMDs
+Dominican Republic,DOM,7,1966,2020,List PR with small MMDs
+Algeria,DZA,8,1997,2020,List PR with large MMDs
+Ecuador,ECU,7,1952,2020,List PR with small MMDs
+Egypt,EGY,1,1950,2020,Two-round system
+Spain,ESP,7,1977,2020,List PR with small MMDs
+Estonia,EST,9,1990,2020,STV
+Ethiopia,ETH,0,1995,2020,First-past-the-post
+Finland,FIN,8,1907,2020,List PR with large MMDs
+Fiji,FJI,8,2014,2020,List PR with large MMDs
+France,FRA,6,1951,2020,Mixed-member PR
+Gabon,GAB,1,1990,2020,Two-round system
+United Kingdom,GBR,0,1790,2020,First-past-the-post
+Georgia,GEO,5,1999,2020,Parallel (SMD/PR)
+Ghana,GHA,0,1951,2020,First-past-the-post
+Guinea,GIN,5,1995,2020,Parallel (SMD/PR)
+The Gambia,GMB,0,1947,2020,First-past-the-post
+Guinea-Bissau,GNB,7,1994,2020,List PR with small MMDs
+Equatorial Guinea,GNQ,8,1999,2020,List PR with large MMDs
+Greece,GRC,5,1956,2020,Parallel (SMD/PR)
+Guatemala,GTM,7,1944,2020,List PR with small MMDs
+Guyana,GUY,8,2001,2020,List PR with large MMDs
+Honduras,HND,8,1985,2020,List PR with large MMDs
+Croatia,HRV,8,2000,2020,List PR with large MMDs
+Haiti,HTI,1,1995,2020,Two-round system
+Hungary,HUN,6,1990,2020,Mixed-member PR
+Indonesia,IDN,8,1955,2020,List PR with large MMDs
+India,IND,0,1920,2020,First-past-the-post
+Ireland,IRL,9,1948,2020,STV
+Iran,IRN,1,1980,2020,Two-round system
+Iraq,IRQ,8,2005,2020,List PR with large MMDs
+Iceland,ISL,7,1963,2020,List PR with small MMDs
+Israel,ISR,8,1949,2020,List PR with large MMDs
+Italy,ITA,6,1924,2020,Mixed-member PR
+Jamaica,JAM,0,1901,2020,First-past-the-post
+Jordan,JOR,7,2016,2020,List PR with small MMDs
+Japan,JPN,5,1996,2020,Parallel (SMD/PR)
+Kazakhstan,KAZ,8,2012,2020,List PR with large MMDs
+Kenya,KEN,0,1920,2020,First-past-the-post
+Kyrgyzstan,KGZ,8,2005,2020,List PR with large MMDs
+Cambodia,KHM,7,1993,2020,List PR with small MMDs
+South Korea,KOR,5,1963,2020,Parallel (SMD/PR)
+Kuwait,KWT,10,1999,2020,SNTV
+Laos,LAO,3,1955,2020,Block vote (MMD)
+Lebanon,LBN,3,1953,2020,Block vote (MMD)
+Liberia,LBR,0,1847,2020,First-past-the-post
+Libya,LBY,5,2012,2020,Parallel (SMD/PR)
+Sri Lanka,LKA,8,1989,2020,List PR with large MMDs
+Lesotho,LSO,6,2002,2020,Mixed-member PR
+Lithuania,LTU,5,1992,2020,Parallel (SMD/PR)
+Luxembourg,LUX,8,1945,2020,List PR with large MMDs
+Latvia,LVA,8,1922,2020,List PR with large MMDs
+Morocco,MAR,7,1997,2020,List PR with small MMDs
+Moldova,MDA,8,1998,2020,List PR with large MMDs
+Madagascar,MDG,1,2007,2020,Two-round system
+Maldives,MDV,0,2009,2020,First-past-the-post
+Mexico,MEX,6,1964,2020,Mixed-member PR
+Macedonia,MKD,8,2002,2020,List PR with large MMDs
+Mali,MLI,1,1992,2020,Two-round system
+Burma/Myanmar,MMR,0,2010,2020,First-past-the-post
+Montenegro,MNE,8,1998,2020,List PR with large MMDs
+Mongolia,MNG,0,2016,2020,First-past-the-post
+Mozambique,MOZ,8,1994,2020,List PR with large MMDs
+Mauritania,MRT,1,1992,2020,Two-round system
+Mauritius,MUS,3,1976,2020,Block vote (MMD)
+Malawi,MWI,0,1994,2020,First-past-the-post
+Malaysia,MYS,0,1955,2020,First-past-the-post
+Namibia,NAM,8,1989,2020,List PR with large MMDs
+Niger,NER,5,1946,2020,Parallel (SMD/PR)
+Nigeria,NGA,0,1964,2020,First-past-the-post
+Nicaragua,NIC,7,1996,2020,List PR with small MMDs
+Netherlands,NLD,8,1918,2020,List PR with large MMDs
+Norway,NOR,8,1953,2020,List PR with large MMDs
+Nepal,NPL,5,2008,2020,Parallel (SMD/PR)
+New Zealand,NZL,6,1996,2020,Mixed-member PR
+Oman,OMN,0,2000,2020,First-past-the-post
+Pakistan,PAK,0,1977,2020,First-past-the-post
+Panama,PAN,5,1984,2020,Parallel (SMD/PR)
+Peru,PER,8,1980,2020,List PR with large MMDs
+Philippines,PHL,5,1998,2020,Parallel (SMD/PR)
+Papua New Guinea,PNG,2,2007,2020,Alternative vote (SMD)
+Poland,POL,8,1991,2020,List PR with large MMDs
+North Korea,PRK,1,1948,2020,Two-round system
+Portugal,PRT,8,1976,2020,List PR with large MMDs
+Paraguay,PRY,7,1993,2020,List PR with small MMDs
+Palestine/West Bank,PSE,5,2006,2020,Parallel (SMD/PR)
+Romania,ROU,6,2008,2020,Mixed-member PR
+Russia,RUS,8,2011,2020,List PR with large MMDs
+Rwanda,RWA,8,2008,2020,List PR with large MMDs
+Sudan,SDN,5,2010,2020,Parallel (SMD/PR)
+Senegal,SEN,5,1983,2020,Parallel (SMD/PR)
+Singapore,SGP,1,1997,2020,Two-round system
+Solomon Islands,SLB,0,1964,2020,First-past-the-post
+Sierra Leone,SLE,0,1957,2020,First-past-the-post
+El Salvador,SLV,7,1976,2020,List PR with small MMDs
+Somalia,SOM,7,1964,2020,List PR with small MMDs
+Serbia,SRB,8,2000,2020,List PR with large MMDs
+São Tomé and Príncipe,STP,8,1991,2020,List PR with large MMDs
+Suriname,SUR,7,1987,2020,List PR with small MMDs
+Slovakia,SVK,8,1994,2020,List PR with large MMDs
+Slovenia,SVN,8,1990,2020,List PR with large MMDs
+Sweden,SWE,8,1921,2020,List PR with large MMDs
+Swaziland,SWZ,0,1998,2020,First-past-the-post
+Seychelles,SYC,5,1993,2020,Parallel (SMD/PR)
+Syria,SYR,3,1954,2020,Block vote (MMD)
+Chad,TCD,5,2011,2020,Parallel (SMD/PR)
+Togo,TGO,7,2007,2020,List PR with small MMDs
+Thailand,THA,5,2001,2020,Parallel (SMD/PR)
+Tajikistan,TJK,5,2000,2020,Parallel (SMD/PR)
+Turkmenistan,TKM,1,1998,2020,Two-round system
+Timor-Leste,TLS,8,2007,2020,List PR with large MMDs
+Trinidad and Tobago,TTO,0,1925,2020,First-past-the-post
+Tunisia,TUN,7,2011,2020,List PR with small MMDs
+Turkey,TUR,8,1995,2020,List PR with large MMDs
+Taiwan,TWN,5,1992,2020,Parallel (SMD/PR)
+Tanzania,TZA,0,1958,2020,First-past-the-post
+Uganda,UGA,0,1958,2020,First-past-the-post
+Ukraine,UKR,8,2006,2020,List PR with large MMDs
+Uruguay,URY,7,1934,2020,List PR with small MMDs
+United States of America,USA,0,1900,2020,First-past-the-post
+Uzbekistan,UZB,1,1990,2020,Two-round system
+Venezuela,VEN,5,2015,2020,Parallel (SMD/PR)
+Vanuatu,VUT,10,1975,2020,SNTV
+Kosovo,XKX,8,2017,2020,List PR with large MMDs
+Yemen,YEM,0,1993,2020,First-past-the-post
+South Africa,ZAF,8,1994,2020,List PR with large MMDs
+Zambia,ZMB,0,1926,2020,First-past-the-post
+Zimbabwe,ZWE,0,1995,2020,First-past-the-post
+Zanzibar,ZZB,0,2016,2020,First-past-the-post

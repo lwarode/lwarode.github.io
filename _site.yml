@@ -1,0 +1,25 @@
+title: "Lukas Warode"
+navbar:
+  title: "Lukas Warode"
+  left:
+    - text: "About me"
+      href: index.html
+    - text: "Data Visualization and Analysis Gallery"
+      menu:
+        - text: "ParlGov Visualizations"
+          href: pg_vis.html
+  right:
+    - icon: fa-envelope fa-lg
+      href: "mailto:lukas.warode@gmx.de"
+    - icon: fa-github fa-lg
+      href: http://github.com/lwarode
+    - icon: fa-linkedin fa-lg
+      href: https://www.linkedin.com/in/lukas-warode-64a84a1a3/
+output_dir: "."
+output:
+  html_document:
+    theme: cosmo
+    highlight: haddock
+#    css: 'styles.css'
+#    include:
+#      after_body: _footer.html

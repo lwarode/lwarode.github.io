@@ -1,0 +1,29 @@
+---
+title: "ParlGov Visualizations"
+output:
+  html_document:
+    code_folding: hide
+    fig_width: 8 
+    fig_height: 5
+    theme: cosmo
+---
+
+</br>
+In the following, the possibilities of data analysis on the basis of the ParlGov database are explained by the use of several visualizations.
+
+The main dataset is divided into three parts:
+
+* ##### [**Parties**](party_vis.html)
+* ##### [**Elections**](election_vis.html)
+* ##### [**Cabinets**](cabinet_vis.html)
+
+Each of the categories is analysed graphically by one case examples.
+</br>
+
+___
+
+### References
+Döring, Holger and Philip Manow (2019) Parliaments and governments database (ParlGov): Information on parties, elections and cabinets in modern democracies. Development version.
+
+Laakso, M. & Taagepera, R. (1979) '"Effective" Number of Parties: A Measure with Application to West Europe', *Comparative Political Studies*, 12(1), pp. 3-27.
+
