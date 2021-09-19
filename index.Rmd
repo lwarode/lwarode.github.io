@@ -2,15 +2,21 @@
 title: "About me"
 ---
 
-<img src="images/logo_lw.png" style="width:25%; margin-right: 25px" align="left">
+<img src="images/_1255176_sw.jpg" style="width:35%; margin-right: 35px" align="left">
 
 <br />
 <br />
 
-#### My name is Lukas Warode, I am a 21 years old political science student at the University of Bremen. I am especially interested in comparative politics and quantitative methods. Besides that I am working as a student assistant at SOCIUM - AG Manow, among others on the projects [*ParlGov*](http://www.parlgov.org) (Parliaments and governments database) and [*CinC*](http://parliamentarycareersincomparison.org) (Careers in Comparison). Besides my academic activity, I volunteer for *CorrelAid*, primarily at the local chapter Bremen.
+### `r fontawesome::fa("university")` &nbsp; M.Sc. in Data Science for Public Policy, 2021 -- 2023
+#### &nbsp; &nbsp; &nbsp; Hertie School
 
-#### I am very interested in statistical analysis and its applied concepts. Furthermore, aesthetical data visualization suits me in general. For these concerns I mainly use [R](https://www.r-project.org) and [RStudio](https://rstudio.com), particularly focusing on the ["tidyverse"](https://www.tidyverse.org).
+### `r fontawesome::fa("university")` &nbsp; B.A. in Political Science, 2021 
+#### &nbsp; &nbsp; &nbsp; University of Bremen
 
-#### Currently, I am in the final year of my Bachelor's degree. I also have spent one semester abroad studying at Queen's University Belfast.
+<br />
 
+##### Hi there! I'm a [Master's student in Data Science for Public Policy at the Hertie School](https://www.hertie-school.org/en/mds). I have a background and strong domain interest in Political Science, with several years of work experience in academia, including positions as a research assistant and tutor in Applied Statistics. My substantive research interest in Political and Social Sciences is accompanied by a general interest in data-driven approaches and Statistics. Therefore, I mainly use R with a focus on the tidyverse!
 
+##### This website features several visualizations and analyses using data from the [ParlGov](https://parlgov.org/) project. [Check them out!](https://lwarode.github.io/pg_vis.html)
+
+##### If you are interested in more recent projects and work of mine, check out my [GitHub](https://github.com/lwarode)!
