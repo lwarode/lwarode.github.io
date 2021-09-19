@@ -2,7 +2,7 @@
 title: "About me"
 ---
 
-<img src="images/_1255176_sw.jpg" style="width:35%; margin-right: 35px" align="left">
+<img src="images/_1255176_sw_compressed.jpg" style="width:35%; margin-right: 35px" align="left">
 
 <br />
 <br />
