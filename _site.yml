@@ -9,6 +9,8 @@ navbar:
         - text: "ParlGov Visualizations"
           href: pg_vis.html
   right:
+    - icon: fa-file fa-lg
+      href: "https://github.com/lwarode/CV/blob/main/CV.pdf"
     - icon: fa-envelope fa-lg
       href: "mailto:lukas.warode@gmx.de"
     - icon: fa-github fa-lg
