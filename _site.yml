@@ -13,11 +13,11 @@ navbar:
       href: "https://github.com/lwarode/CV/blob/main/CV.pdf"
     - icon: fa-envelope fa-lg
       href: "mailto:lukas.warode@gmx.de"
-    - icon: fa-twitter fa-lg
+    - icon: fa-twitter
       href: "https://twitter.com/lukas_warode"
-    - icon: fa-github fa-lg
+    - icon: fa-github
       href: http://github.com/lwarode
-    - icon: fa-linkedin fa-lg
+    - icon: fa-linkedin
       href: https://www.linkedin.com/in/lukas-warode-64a84a1a3/
 output_dir: "."
 output:

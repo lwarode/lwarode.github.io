@@ -16,8 +16,8 @@ library(ggrepel)
 ```
 
 ```{r dataset, include = FALSE}
-party_url <- "http://www.parlgov.org/static/data/experimental-cp1252/view_party.csv"
-party_raw <- read_csv(party_url, locale = readr::locale(encoding = "latin1"))
+party_raw <- read_csv("https://parlgov.org/data/parlgov-development_csv-utf-8/view_party.csv", 
+                          locale = locale(encoding = "utf-8"))
 ```
 
 ```{r data wrangling and precaution, include = FALSE}
@@ -26,7 +26,7 @@ fam_level <- c("com", "eco", "soc", "agr", "lib", "chr", "con", "right")
 
 # countrycode informations
 party <- party_raw %>% 
-  mutate(region = as.factor(countrycode(country_name, "country.name", "region")),
+  mutate(region = as.factor(countrycode(country_name, "country.name", "region23")),
          family = factor(family_name_short, fam_level),
          fam_color = case_when(
            family == "com" ~ "#FB9A99",

@@ -13,7 +13,7 @@
 
 <title>ParlGov Visualizations – Parties</title>
 
-<script src="site_libs/header-attrs-2.1/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
@@ -24,6 +24,15 @@
 <script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
 
 
 <style type="text/css">code{white-space: pre;}</style>
@@ -150,6 +159,7 @@ h6 {
   text-align: left;
 }
 </style>
+
 
 
 
@@ -375,20 +385,32 @@ $(document).ready(function () {
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
+  <a href="https://github.com/lwarode/CV/blob/main/CV.pdf">
+    <span class="fas fa-id-card fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="mailto:lukas.warode@gmx.de">
-    <span class="fa fa-envelope fa-lg"></span>
+    <span class="fas fa-envelope fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://twitter.com/lukas_warode">
+    <span class="fas fa-twitter"></span>
      
   </a>
 </li>
 <li>
   <a href="http://github.com/lwarode">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fas fa-github"></span>
      
   </a>
 </li>
 <li>
   <a href="https://www.linkedin.com/in/lukas-warode-64a84a1a3/">
-    <span class="fa fa-linkedin fa-lg"></span>
+    <span class="fas fa-linkedin"></span>
      
   </a>
 </li>
@@ -432,123 +454,123 @@ $(document).ready(function () {
 <li>right – Right-wing</li>
 </ul>
 <hr />
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>plot_party_families_lr &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</span>
-<span id="cb1-2"><a href="#cb1-2"></a>  </span>
-<span id="cb1-3"><a href="#cb1-3"></a>  subset_p &lt;-<span class="st"> </span>party <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># subset for looping</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="st">    </span><span class="kw">filter</span>(country_name <span class="op">==</span><span class="st"> </span>x)</span>
-<span id="cb1-5"><a href="#cb1-5"></a></span>
-<span id="cb1-6"><a href="#cb1-6"></a>  <span class="kw">ggplot</span>(<span class="dt">data =</span> subset_p, </span>
-<span id="cb1-7"><a href="#cb1-7"></a>         <span class="kw">aes</span>(<span class="dt">x =</span> family, <span class="dt">y =</span> left_right, <span class="dt">color =</span> family)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb1-8"><a href="#cb1-8"></a><span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
-<span id="cb1-9"><a href="#cb1-9"></a><span class="st">    </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="st"> </span></span>
-<span id="cb1-10"><a href="#cb1-10"></a><span class="st">    </span><span class="kw">coord_flip</span>(<span class="dt">clip =</span> <span class="st">&quot;off&quot;</span>) <span class="op">+</span></span>
-<span id="cb1-11"><a href="#cb1-11"></a><span class="st">    </span><span class="kw">scale_color_manual</span>(<span class="dt">values =</span> pfcols) <span class="op">+</span></span>
-<span id="cb1-12"><a href="#cb1-12"></a><span class="st">    </span><span class="kw">scale_y_continuous</span>(<span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">10</span>, <span class="dt">by =</span> <span class="dv">1</span>),</span>
-<span id="cb1-13"><a href="#cb1-13"></a>                       <span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">10</span>)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb1-14"><a href="#cb1-14"></a><span class="st">    </span><span class="kw">annotation_custom</span>(lr_<span class="dv">0</span>, <span class="dt">xmin =</span> <span class="fl">-0.25</span>, <span class="dt">xmax =</span> <span class="fl">-0.25</span>, <span class="dt">ymin =</span> <span class="dv">0</span>, <span class="dt">ymax =</span> <span class="dv">0</span>) <span class="op">+</span></span>
-<span id="cb1-15"><a href="#cb1-15"></a><span class="st">    </span><span class="kw">annotation_custom</span>(lr_<span class="dv">10</span>, <span class="dt">xmin =</span> <span class="fl">-0.25</span>, <span class="dt">xmax =</span> <span class="fl">-0.25</span>, <span class="dt">ymin =</span> <span class="dv">10</span>, <span class="dt">ymax =</span> <span class="dv">10</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb1-16"><a href="#cb1-16"></a><span class="st">    </span><span class="kw">theme_light</span>() <span class="op">+</span><span class="st"> </span></span>
-<span id="cb1-17"><a href="#cb1-17"></a><span class="st">    </span><span class="kw">ggtitle</span>(<span class="kw">paste0</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, subset_p<span class="op">$</span>country_name)) <span class="op">+</span></span>
-<span id="cb1-18"><a href="#cb1-18"></a><span class="st">    </span><span class="kw">labs</span>(</span>
-<span id="cb1-19"><a href="#cb1-19"></a>      <span class="dt">x =</span> <span class="st">&quot;&quot;</span>,</span>
-<span id="cb1-20"><a href="#cb1-20"></a>      <span class="dt">y =</span> <span class="st">&quot;&quot;</span>,</span>
-<span id="cb1-21"><a href="#cb1-21"></a>      <span class="dt">subtitle =</span> <span class="st">&quot;0 = (Extreme) Left | 10 = (Extreme) Right&quot;</span>,</span>
-<span id="cb1-22"><a href="#cb1-22"></a>      <span class="dt">color =</span> <span class="st">&quot;Party Family&quot;</span></span>
-<span id="cb1-23"><a href="#cb1-23"></a>    )  <span class="op">+</span></span>
-<span id="cb1-24"><a href="#cb1-24"></a><span class="st">    </span><span class="kw">theme</span>(<span class="dt">text =</span> <span class="kw">element_text</span>(<span class="dt">family =</span> <span class="st">&quot;Formata-CondensedLight&quot;</span>, <span class="dt">size =</span> <span class="dv">10</span>),</span>
-<span id="cb1-25"><a href="#cb1-25"></a>          <span class="dt">legend.text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">12</span>),</span>
-<span id="cb1-26"><a href="#cb1-26"></a>          <span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>, <span class="dt">size =</span> <span class="dv">14</span>),</span>
-<span id="cb1-27"><a href="#cb1-27"></a>          <span class="dt">plot.subtitle =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>, <span class="dt">size =</span> <span class="dv">12</span>),</span>
-<span id="cb1-28"><a href="#cb1-28"></a>          <span class="dt">axis.ticks.y =</span> <span class="kw">element_blank</span>(),</span>
-<span id="cb1-29"><a href="#cb1-29"></a>          <span class="dt">axis.text.y =</span> <span class="kw">element_blank</span>(),</span>
-<span id="cb1-30"><a href="#cb1-30"></a>          <span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">12</span>),</span>
-<span id="cb1-31"><a href="#cb1-31"></a>          <span class="dt">plot.margin =</span> <span class="kw">unit</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.5</span>), <span class="st">&quot;cm&quot;</span>))</span>
-<span id="cb1-32"><a href="#cb1-32"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>plot_party_families_lr <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  subset_p <span class="ot">&lt;-</span> party <span class="sc">%&gt;%</span> <span class="co"># subset for looping</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(country_name <span class="sc">==</span> x)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">data =</span> subset_p, </span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>         <span class="fu">aes</span>(<span class="at">x =</span> family, <span class="at">y =</span> left_right, <span class="at">color =</span> family)) <span class="sc">+</span> </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">coord_flip</span>(<span class="at">clip =</span> <span class="st">&quot;off&quot;</span>) <span class="sc">+</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="at">values =</span> pfcols) <span class="sc">+</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">10</span>, <span class="at">by =</span> <span class="dv">1</span>),</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>                       <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">10</span>)) <span class="sc">+</span> </span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">annotation_custom</span>(lr_0, <span class="at">xmin =</span> <span class="sc">-</span><span class="fl">0.25</span>, <span class="at">xmax =</span> <span class="sc">-</span><span class="fl">0.25</span>, <span class="at">ymin =</span> <span class="dv">0</span>, <span class="at">ymax =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">annotation_custom</span>(lr_10, <span class="at">xmin =</span> <span class="sc">-</span><span class="fl">0.25</span>, <span class="at">xmax =</span> <span class="sc">-</span><span class="fl">0.25</span>, <span class="at">ymin =</span> <span class="dv">10</span>, <span class="at">ymax =</span> <span class="dv">10</span>) <span class="sc">+</span> </span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_light</span>() <span class="sc">+</span> </span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggtitle</span>(<span class="fu">paste0</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>, subset_p<span class="sc">$</span>country_name)) <span class="sc">+</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>      <span class="at">subtitle =</span> <span class="st">&quot;0 = (Extreme) Left | 10 = (Extreme) Right&quot;</span>,</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>      <span class="at">color =</span> <span class="st">&quot;Party Family&quot;</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    )  <span class="sc">+</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">&quot;Formata-CondensedLight&quot;</span>, <span class="at">size =</span> <span class="dv">10</span>),</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>          <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>          <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">14</span>),</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>          <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>          <span class="at">axis.ticks.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>          <span class="at">axis.text.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>          <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>          <span class="at">plot.margin =</span> <span class="fu">unit</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.5</span>), <span class="st">&quot;cm&quot;</span>))</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <div id="all" class="section level3">
 <h3>All</h3>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> <span class="kw">subset</span>(party, <span class="op">!</span><span class="kw">is.na</span>(party<span class="op">$</span>family)), </span>
-<span id="cb2-2"><a href="#cb2-2"></a>       <span class="kw">aes</span>(<span class="dt">x =</span> family, <span class="dt">y =</span> left_right, <span class="dt">color =</span> family)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb2-3"><a href="#cb2-3"></a><span class="st">    </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="st"> </span></span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
-<span id="cb2-5"><a href="#cb2-5"></a><span class="st">    </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>country_name, <span class="dt">ncol =</span> <span class="dv">4</span>, <span class="dt">scales =</span> <span class="st">&quot;free&quot;</span>) <span class="op">+</span></span>
-<span id="cb2-6"><a href="#cb2-6"></a><span class="st">    </span><span class="kw">coord_flip</span>(<span class="dt">clip =</span> <span class="st">&quot;off&quot;</span>) <span class="op">+</span></span>
-<span id="cb2-7"><a href="#cb2-7"></a><span class="st">    </span><span class="kw">scale_color_manual</span>(<span class="dt">values =</span> pfcols) <span class="op">+</span></span>
-<span id="cb2-8"><a href="#cb2-8"></a><span class="st">    </span><span class="kw">scale_y_continuous</span>(<span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">10</span>, <span class="dt">by =</span> <span class="dv">1</span>),</span>
-<span id="cb2-9"><a href="#cb2-9"></a>                       <span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">10</span>),</span>
-<span id="cb2-10"><a href="#cb2-10"></a>                       <span class="dt">name =</span> <span class="st">&quot;Left-Right scale&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb2-11"><a href="#cb2-11"></a><span class="st">    </span><span class="kw">theme_light</span>() <span class="op">+</span><span class="st"> </span></span>
-<span id="cb2-12"><a href="#cb2-12"></a><span class="st">    </span><span class="kw">ggtitle</span>(<span class="kw">paste0</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="st">&quot;Party Families&quot;</span>)) <span class="op">+</span></span>
-<span id="cb2-13"><a href="#cb2-13"></a><span class="st">    </span><span class="kw">labs</span>(</span>
-<span id="cb2-14"><a href="#cb2-14"></a>      <span class="dt">x =</span> <span class="st">&quot;&quot;</span>,</span>
-<span id="cb2-15"><a href="#cb2-15"></a>      <span class="dt">y =</span> <span class="st">&quot;&quot;</span>,</span>
-<span id="cb2-16"><a href="#cb2-16"></a>      <span class="dt">color =</span> <span class="st">&quot;Party Family&quot;</span></span>
-<span id="cb2-17"><a href="#cb2-17"></a>    )  <span class="op">+</span></span>
-<span id="cb2-18"><a href="#cb2-18"></a><span class="st">    </span><span class="kw">theme</span>(<span class="dt">text =</span> <span class="kw">element_text</span>(<span class="dt">family =</span> <span class="st">&quot;Formata-CondensedLight&quot;</span>, <span class="dt">size =</span> <span class="dv">15</span>),</span>
-<span id="cb2-19"><a href="#cb2-19"></a>          <span class="dt">legend.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">20</span>),</span>
-<span id="cb2-20"><a href="#cb2-20"></a>          <span class="dt">legend.text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="fl">17.5</span>),</span>
-<span id="cb2-21"><a href="#cb2-21"></a>          <span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>, <span class="dt">size =</span> <span class="dv">25</span>),</span>
-<span id="cb2-22"><a href="#cb2-22"></a>          <span class="dt">axis.ticks.y =</span> <span class="kw">element_blank</span>(),</span>
-<span id="cb2-23"><a href="#cb2-23"></a>          <span class="dt">axis.text.y =</span> <span class="kw">element_blank</span>(),</span>
-<span id="cb2-24"><a href="#cb2-24"></a>          <span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="fl">12.5</span>),</span>
-<span id="cb2-25"><a href="#cb2-25"></a>          <span class="dt">plot.margin =</span> <span class="kw">unit</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.5</span>), <span class="st">&quot;cm&quot;</span>),</span>
-<span id="cb2-26"><a href="#cb2-26"></a>          <span class="dt">panel.spacing =</span> <span class="kw">unit</span>(<span class="dv">1</span>, <span class="st">&quot;lines&quot;</span>)</span>
-<span id="cb2-27"><a href="#cb2-27"></a>          )</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="fu">subset</span>(party, <span class="sc">!</span><span class="fu">is.na</span>(party<span class="sc">$</span>family)), </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> family, <span class="at">y =</span> left_right, <span class="at">color =</span> family)) <span class="sc">+</span> </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span> country_name, <span class="at">ncol =</span> <span class="dv">4</span>, <span class="at">scales =</span> <span class="st">&quot;free&quot;</span>) <span class="sc">+</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">coord_flip</span>(<span class="at">clip =</span> <span class="st">&quot;off&quot;</span>) <span class="sc">+</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="at">values =</span> pfcols) <span class="sc">+</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">10</span>, <span class="at">by =</span> <span class="dv">1</span>),</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>                       <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">10</span>),</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>                       <span class="at">name =</span> <span class="st">&quot;Left-Right scale&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_light</span>() <span class="sc">+</span> </span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggtitle</span>(<span class="fu">paste0</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>, <span class="st">&quot;Party Families&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>      <span class="at">color =</span> <span class="st">&quot;Party Family&quot;</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    )  <span class="sc">+</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">&quot;Formata-CondensedLight&quot;</span>, <span class="at">size =</span> <span class="dv">15</span>),</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>          <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>),</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>          <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="fl">17.5</span>),</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>          <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">25</span>),</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>          <span class="at">axis.ticks.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>          <span class="at">axis.text.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>          <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="fl">12.5</span>),</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>          <span class="at">plot.margin =</span> <span class="fu">unit</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.5</span>), <span class="st">&quot;cm&quot;</span>),</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>          <span class="at">panel.spacing =</span> <span class="fu">unit</span>(<span class="dv">1</span>, <span class="st">&quot;lines&quot;</span>)</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>          )</span></code></pre></div>
 <p><img src="party_vis_files/figure-html/unnamed-chunk-1-1.png" width="1152" /></p>
 </div>
 <div id="australia-and-new-zealand" class="section level3">
 <h3>Australia and New Zealand</h3>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="cf">for</span>(country_name <span class="cf">in</span> <span class="kw">unique</span>(<span class="st">`</span><span class="dt">Australia and New Zealand</span><span class="st">`</span><span class="op">$</span>country_name)) {</span>
-<span id="cb3-2"><a href="#cb3-2"></a>  <span class="kw">print</span>(<span class="kw">plot_party_families_lr</span>(<span class="dt">x =</span> country_name))</span>
-<span id="cb3-3"><a href="#cb3-3"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(country_name <span class="cf">in</span> <span class="fu">unique</span>(<span class="st">`</span><span class="at">Australia and New Zealand</span><span class="st">`</span><span class="sc">$</span>country_name)) {</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">plot_party_families_lr</span>(<span class="at">x =</span> country_name))</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p><img src="party_vis_files/figure-html/unnamed-chunk-2-1.png" width="768" /><img src="party_vis_files/figure-html/unnamed-chunk-2-2.png" width="768" /></p>
 </div>
 <div id="eastern-asia" class="section level3">
 <h3>Eastern Asia</h3>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="cf">for</span>(country_name <span class="cf">in</span> <span class="kw">unique</span>(<span class="st">`</span><span class="dt">Eastern Asia</span><span class="st">`</span><span class="op">$</span>country_name)) {</span>
-<span id="cb4-2"><a href="#cb4-2"></a>  <span class="kw">print</span>(<span class="kw">plot_party_families_lr</span>(<span class="dt">x =</span> country_name))</span>
-<span id="cb4-3"><a href="#cb4-3"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(country_name <span class="cf">in</span> <span class="fu">unique</span>(<span class="st">`</span><span class="at">Eastern Asia</span><span class="st">`</span><span class="sc">$</span>country_name)) {</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">plot_party_families_lr</span>(<span class="at">x =</span> country_name))</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p><img src="party_vis_files/figure-html/unnamed-chunk-3-1.png" width="768" /></p>
 </div>
 <div id="eastern-europe" class="section level3">
 <h3>Eastern Europe</h3>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="cf">for</span>(country_name <span class="cf">in</span> <span class="kw">unique</span>(<span class="st">`</span><span class="dt">Eastern Europe</span><span class="st">`</span><span class="op">$</span>country_name)) {</span>
-<span id="cb5-2"><a href="#cb5-2"></a>  <span class="kw">print</span>(<span class="kw">plot_party_families_lr</span>(<span class="dt">x =</span> country_name))</span>
-<span id="cb5-3"><a href="#cb5-3"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(country_name <span class="cf">in</span> <span class="fu">unique</span>(<span class="st">`</span><span class="at">Eastern Europe</span><span class="st">`</span><span class="sc">$</span>country_name)) {</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">plot_party_families_lr</span>(<span class="at">x =</span> country_name))</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p><img src="party_vis_files/figure-html/unnamed-chunk-4-1.png" width="768" /><img src="party_vis_files/figure-html/unnamed-chunk-4-2.png" width="768" /><img src="party_vis_files/figure-html/unnamed-chunk-4-3.png" width="768" /><img src="party_vis_files/figure-html/unnamed-chunk-4-4.png" width="768" /><img src="party_vis_files/figure-html/unnamed-chunk-4-5.png" width="768" /><img src="party_vis_files/figure-html/unnamed-chunk-4-6.png" width="768" /></p>
 </div>
 <div id="northern-america" class="section level3">
 <h3>Northern America</h3>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="cf">for</span>(country_name <span class="cf">in</span> <span class="kw">unique</span>(<span class="st">`</span><span class="dt">Northern America</span><span class="st">`</span><span class="op">$</span>country_name)) {</span>
-<span id="cb6-2"><a href="#cb6-2"></a>  <span class="kw">print</span>(<span class="kw">plot_party_families_lr</span>(<span class="dt">x =</span> country_name))</span>
-<span id="cb6-3"><a href="#cb6-3"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(country_name <span class="cf">in</span> <span class="fu">unique</span>(<span class="st">`</span><span class="at">Northern America</span><span class="st">`</span><span class="sc">$</span>country_name)) {</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">plot_party_families_lr</span>(<span class="at">x =</span> country_name))</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p><img src="party_vis_files/figure-html/unnamed-chunk-5-1.png" width="768" /></p>
 </div>
 <div id="northern-europe" class="section level3">
 <h3>Northern Europe</h3>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="cf">for</span>(country_name <span class="cf">in</span> <span class="kw">unique</span>(<span class="st">`</span><span class="dt">Northern Europe</span><span class="st">`</span><span class="op">$</span>country_name)) {</span>
-<span id="cb7-2"><a href="#cb7-2"></a>  <span class="kw">print</span>(<span class="kw">plot_party_families_lr</span>(<span class="dt">x =</span> country_name))</span>
-<span id="cb7-3"><a href="#cb7-3"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(country_name <span class="cf">in</span> <span class="fu">unique</span>(<span class="st">`</span><span class="at">Northern Europe</span><span class="st">`</span><span class="sc">$</span>country_name)) {</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">plot_party_families_lr</span>(<span class="at">x =</span> country_name))</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p><img src="party_vis_files/figure-html/unnamed-chunk-6-1.png" width="768" /><img src="party_vis_files/figure-html/unnamed-chunk-6-2.png" width="768" /><img src="party_vis_files/figure-html/unnamed-chunk-6-3.png" width="768" /><img src="party_vis_files/figure-html/unnamed-chunk-6-4.png" width="768" /><img src="party_vis_files/figure-html/unnamed-chunk-6-5.png" width="768" /><img src="party_vis_files/figure-html/unnamed-chunk-6-6.png" width="768" /><img src="party_vis_files/figure-html/unnamed-chunk-6-7.png" width="768" /><img src="party_vis_files/figure-html/unnamed-chunk-6-8.png" width="768" /><img src="party_vis_files/figure-html/unnamed-chunk-6-9.png" width="768" /><img src="party_vis_files/figure-html/unnamed-chunk-6-10.png" width="768" /></p>
 </div>
 <div id="southern-europe" class="section level3">
 <h3>Southern Europe</h3>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="cf">for</span>(country_name <span class="cf">in</span> <span class="kw">unique</span>(<span class="st">`</span><span class="dt">Southern Europe</span><span class="st">`</span><span class="op">$</span>country_name)) {</span>
-<span id="cb8-2"><a href="#cb8-2"></a>  <span class="kw">print</span>(<span class="kw">plot_party_families_lr</span>(<span class="dt">x =</span> country_name))</span>
-<span id="cb8-3"><a href="#cb8-3"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(country_name <span class="cf">in</span> <span class="fu">unique</span>(<span class="st">`</span><span class="at">Southern Europe</span><span class="st">`</span><span class="sc">$</span>country_name)) {</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">plot_party_families_lr</span>(<span class="at">x =</span> country_name))</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p><img src="party_vis_files/figure-html/unnamed-chunk-7-1.png" width="768" /><img src="party_vis_files/figure-html/unnamed-chunk-7-2.png" width="768" /><img src="party_vis_files/figure-html/unnamed-chunk-7-3.png" width="768" /><img src="party_vis_files/figure-html/unnamed-chunk-7-4.png" width="768" /><img src="party_vis_files/figure-html/unnamed-chunk-7-5.png" width="768" /><img src="party_vis_files/figure-html/unnamed-chunk-7-6.png" width="768" /><img src="party_vis_files/figure-html/unnamed-chunk-7-7.png" width="768" /></p>
 </div>
 <div id="western-asia" class="section level3">
 <h3>Western Asia</h3>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="cf">for</span>(country_name <span class="cf">in</span> <span class="kw">unique</span>(<span class="st">`</span><span class="dt">Western Asia</span><span class="st">`</span><span class="op">$</span>country_name)) {</span>
-<span id="cb9-2"><a href="#cb9-2"></a>  <span class="kw">print</span>(<span class="kw">plot_party_families_lr</span>(<span class="dt">x =</span> country_name))</span>
-<span id="cb9-3"><a href="#cb9-3"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(country_name <span class="cf">in</span> <span class="fu">unique</span>(<span class="st">`</span><span class="at">Western Asia</span><span class="st">`</span><span class="sc">$</span>country_name)) {</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">plot_party_families_lr</span>(<span class="at">x =</span> country_name))</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p><img src="party_vis_files/figure-html/unnamed-chunk-8-1.png" width="768" /><img src="party_vis_files/figure-html/unnamed-chunk-8-2.png" width="768" /><img src="party_vis_files/figure-html/unnamed-chunk-8-3.png" width="768" /></p>
 </div>
 <div id="western-europe" class="section level3">
 <h3>Western Europe</h3>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="cf">for</span>(country_name <span class="cf">in</span> <span class="kw">unique</span>(<span class="st">`</span><span class="dt">Western Europe</span><span class="st">`</span><span class="op">$</span>country_name)) {</span>
-<span id="cb10-2"><a href="#cb10-2"></a>  <span class="kw">print</span>(<span class="kw">plot_party_families_lr</span>(<span class="dt">x =</span> country_name))</span>
-<span id="cb10-3"><a href="#cb10-3"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(country_name <span class="cf">in</span> <span class="fu">unique</span>(<span class="st">`</span><span class="at">Western Europe</span><span class="st">`</span><span class="sc">$</span>country_name)) {</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">plot_party_families_lr</span>(<span class="at">x =</span> country_name))</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p><img src="party_vis_files/figure-html/unnamed-chunk-9-1.png" width="768" /><img src="party_vis_files/figure-html/unnamed-chunk-9-2.png" width="768" /><img src="party_vis_files/figure-html/unnamed-chunk-9-3.png" width="768" /><img src="party_vis_files/figure-html/unnamed-chunk-9-4.png" width="768" /><img src="party_vis_files/figure-html/unnamed-chunk-9-5.png" width="768" /><img src="party_vis_files/figure-html/unnamed-chunk-9-6.png" width="768" /><img src="party_vis_files/figure-html/unnamed-chunk-9-7.png" width="768" /></p>
 </div>
 </div>
@@ -562,7 +584,7 @@ $(document).ready(function () {
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();

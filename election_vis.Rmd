@@ -17,8 +17,8 @@ library(lubridate)
 ```
 
 ```{r datasets, include = FALSE}
-election_url <- "http://www.parlgov.org/static/data/experimental-cp1252/view_election.csv"
-election_raw <- read_csv(election_url, locale = readr::locale(encoding = "latin1"))
+election_raw <- read_csv("https://parlgov.org/data/parlgov-development_csv-utf-8/view_election.csv", 
+                          locale = locale(encoding = "utf-8"))
 lces <- read_csv("data/vdem_lces_new.csv") # for further differentiation among electoral systems
 ```
 
@@ -31,7 +31,7 @@ election <- election_raw %>%
   filter(!is.na(vote_share_0)) %>% 
   mutate(enep = 1 / sum(vote_share_0^2), # ENEP
          enpp = 1 / sum((seats/seats_total)^2), # ENPP
-         region = as.factor(countrycode(country_name, "country.name", "region")) # region
+         region = as.factor(countrycode(country_name, "country.name", "region23")) # region
          ) 
 
 election_enp <- election %>% 

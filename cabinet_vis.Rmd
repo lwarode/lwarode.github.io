@@ -15,10 +15,10 @@ library(lubridate)
 ```
 
 ```{r datasets, include = FALSE}
-cabinet_url <- "http://www.parlgov.org/static/data/experimental-cp1252/view_cabinet.csv"
-cabinet_raw <- read_csv(cabinet_url, locale = readr::locale(encoding = "latin1"))
-election_url <- "http://www.parlgov.org/static/data/experimental-cp1252/view_election.csv"
-election_raw <- read_csv(election_url, locale = readr::locale(encoding = "latin1"))
+cabinet_raw <- read_csv("https://parlgov.org/data/parlgov-development_csv-utf-8/view_cabinet.csv", 
+                         locale = locale(encoding = "utf-8"))
+election_raw <- read_csv("https://parlgov.org/data/parlgov-development_csv-utf-8/view_election.csv", 
+                          locale = locale(encoding = "utf-8"))
 lces <- read_csv("data/vdem_lces_new.csv") # for further differentiation among electoral systems
 ```
 
