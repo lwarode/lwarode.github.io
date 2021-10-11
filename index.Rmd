@@ -2,8 +2,6 @@
 title: "About me"
 ---
 
-#<img src="images/_1255176_sw_compressed.PNG" style="width: 35%; border: 5px; margin-right: 20px" align="left">
-
 <br />
 <br />
 
