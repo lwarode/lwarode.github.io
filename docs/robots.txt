@@ -1,1 +1,0 @@
-Sitemap: https://github.com/lwarode/lwarode.github.io/sitemap.xml
