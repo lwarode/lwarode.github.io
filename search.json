@@ -1,0 +1,23 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Lukas Warode",
+    "section": "",
+    "text": "lukas.warode@gmx.de\n  \n  \n    \n     lukas_warode\n  \n  \n    \n     lwarode\n  \n  \n    \n     Lukas Warode\n  \n  \n    \n     CV\n  \n\n  \n  \nWelcome!\nI am a PhD student in Political Science at the Mannheim Centre for European Social Research (MZES), University of Mannheim. I hold a Master of Science in Data Science for Public Policy (Hertie School) and a Bachelor of Arts in Political Science (University of Bremen).\nMy dissertation examines how political elites perceive and semantically associate the terms “left” and “right” across the political spectrum. By using open-ended survey responses from federal election candidate surveys, I disentangle the associations of left and right and provide a methodological framework for a) measuring the perception and b) mapping ideological semantics by political position. Methodologically, I rely on different tools of applied text analysis, such as sentiment analysis and embedding-based methods to analyze the semantic structure.\nPreviously, among others, I held positions at POLITICO, the WZB Berlin Social Science Center, and the ParlGov database at the University of Bremen. Broadly speaking, my research interests include political behavior, political psychology, comparative politics, and computational social science.\nHere you can find my CV."
+  },
+  {
+    "objectID": "work.html#research-papers",
+    "href": "work.html#research-papers",
+    "title": "Projects, Publications and Ongoing Work",
+    "section": "Research Papers",
+    "text": "Research Papers\nDisentangling the Perception of Political Ideology among Political Elites: Analyzing the Sentiment of German Candidates’ Associations of Left and Right through Open-Ended Survey Responses\n\n(Ongoing work – Draft available upon request). Political ideology is a cornerstone of political science, yet measuring how political actors perceive ideology remains challenging. This paper argues that the perception of “left” and “right” ideologies is asymmetrically biased across the German political spectrum, with left-leaning elites holding positive views of “left” and negative views of “right,” a pattern not mirrored among right-leaning elites. By analyzing sentiment in open-ended responses from GLES candidate surveys (2013, 2017, 2021), the study finds a persistent “left bias” among German candidates, suggesting the need to reconsider the left-right continuum due to its impact on political behavior and representation.\n\nOpen Discourse: Towards the first fully Comprehensive and Annotated Corpus of the Parliamentary Protocols of the German Bundestag\n\nOpen Discourse is a comprehensive project that processes every word spoken in the German Bundestag’s parliamentary sessions into a machine-readable format, encompassing nearly 900,000 speeches from 1949 to 2022. This paper introduces the database, comparing it to other parliamentary text corpora projects and highlighting its potential for political research through modern quantitative text analysis and political science research frameworks."
+  },
+  {
+    "objectID": "work.html#software-projects",
+    "href": "work.html#software-projects",
+    "title": "Projects, Publications and Ongoing Work",
+    "section": "Software Projects",
+    "text": "Software Projects\nParlGov Dashboard \n\nBuilding on the ParlGov database, ParlGov Dashboard is an R Shiny App that offers comprehensive information on political parties, elections, and cabinets. This dashboard allows for the viewing and downloading of detailed visualizations and tables, with the source code available on GitHub.\n\nopendiscourseR \n\nThis R package provides functions for descriptive statistics and various analyses using the Open Discourse database. The package offers functions to plot and analyze the data descriptively. The source code is available on GitHub."
+  }
+]
