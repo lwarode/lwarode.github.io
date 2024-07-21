@@ -2,18 +2,26 @@ project:
   type: website
 
 website:
-  title: "Personal Website from Lukas Warode"
+  title: "Lukas Warode"
   navbar:
-    left:
-      - href: index.qmd
-        text: Home
-      - about.qmd
+    right:
+      - text: Home
+        href: index.qmd
+      - text: Projects & Publications
+        href: work.qmd
+#      - text: Blog
+#        href: blog.qmd
+      - icon: fas fa-adjust
+        id: theme-toggle
 
 format:
   html:
-    theme: cosmo
+    theme:
+      light: lux
+      # dark: darkly
     css: styles.css
     toc: true
+    toc-depth: 2
 
 editor: visual
 

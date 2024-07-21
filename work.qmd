@@ -1,0 +1,52 @@
+---
+title: Projects, Publications and Ongoing Work
+# image: images/epsa_2024.jpeg
+# about:
+#   id: hero-heading
+#   template: trestles
+#   image-width: 21em
+---
+
+<!-- <style> -->
+<!--   #hero-heading { -->
+<!--     background: linear-gradient(135deg, #6a89cc, #b8e994); -->
+<!--     color: white; -->
+<!--     padding: 50px 20px; -->
+<!--     text-align: center; -->
+<!--     border-radius: 10px; -->
+<!--   } -->
+<!--   .content { -->
+<!--     margin: 20px; -->
+<!--   } -->
+<!-- </style> -->
+
+::: {#hero-heading}
+![](images/epsa_2024.jpeg)
+:::
+
+
+
+## Research Papers
+
+**Disentangling the Perception of Political Ideology among
+Political Elites: Analyzing the Sentiment of German
+Candidates’ Associations of Left and Right through
+Open-Ended Survey Responses**
+
+- (***Ongoing work -- Draft available upon request***). Political ideology is a cornerstone of political science, yet measuring how political actors perceive ideology remains challenging. This paper argues that the perception of "left" and "right" ideologies is asymmetrically biased across the German political spectrum, with left-leaning elites holding positive views of "left" and negative views of "right," a pattern not mirrored among right-leaning elites. By analyzing sentiment in open-ended responses from GLES candidate surveys (2013, 2017, 2021), the study finds a persistent "left bias" among German candidates, suggesting the need to reconsider the left-right continuum due to its impact on political behavior and representation.
+
+[**Open Discourse: Towards the first fully Comprehensive and Annotated Corpus of the Parliamentary Protocols of the German Bundestag**](https://osf.io/preprints/socarxiv/dx87u)
+
+- Open Discourse is a comprehensive project that processes every word spoken in the German Bundestag's parliamentary sessions into a machine-readable format, encompassing nearly 900,000 speeches from 1949 to 2022. This paper introduces the database, comparing it to other parliamentary text corpora projects and highlighting its potential for political research through modern quantitative text analysis and political science research frameworks.
+
+## Software Projects
+
+[**ParlGov Dashboard**](https://lukas-warode.shinyapps.io/ParlGov_Dashboard/) ![](https://raw.githubusercontent.com/lwarode/ParlGov_Dashboard/357257758bb1f2dafe4f995ff30ed81130de1b52/pg_dashboard_sticker.png){width=90 fig-align='left'} 
+
+- Building on the [**ParlGov**](https://www.parlgov.org/) database, **ParlGov Dashboard** is an R Shiny App that offers comprehensive information on political parties, elections, and cabinets. This dashboard allows for the viewing and downloading of detailed visualizations and tables, with the source code available on [GitHub](https://github.com/lwarode/ParlGov_Dashboard).
+
+[**opendiscourseR**](https://open-discourse.github.io/opendiscouRse/) ![](https://raw.githubusercontent.com/open-discourse/opendiscouRse/main/images/od_sticker.png){width=90 fig-align='left'} 
+
+- This R package provides functions for descriptive statistics and various analyses using the [**Open Discourse**](https://opendiscourse.de/) database. The package offers functions to plot and analyze the data descriptively. The source code is available on [GitHub](https://github.com/open-discourse/opendiscouRse).
+
+
