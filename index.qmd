@@ -36,7 +36,7 @@ My dissertation examines **how political elites view and semantically associate 
 
 Previously, among others, I held positions at [**POLITICO**](https://pollofpolls.eu), the [**WZB Berlin Social Science Center**](https://www.wzb.eu/en/research/dynamics-of-political-systems/transformations-of-democracy), and the [**ParlGov**](https://www.parlgov.org/) database at the University of Bremen. Broadly speaking, my research interests include political behavior, political psychology, comparative politics, and computational social science.
 
-Here you can find my [**CV**](https://raw.githack.com/lwarode/CV/main/CV.pdf).
+Here you can find my [**CV**](https://drive.google.com/file/d/1FQsxz0JA8AbX9khEoun_SNdJzact1KNo/view).
 
 <!-- I'm mostly interested in **RWD (real-world data)**, such as hospital **Electronic Health Record** and large public health registry data. I develop [ggehr](https://andreaczhang.github.io/ggehr/), a ggplot2 extension to visualizing EHR data. -->
 
